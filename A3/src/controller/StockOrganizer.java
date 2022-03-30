@@ -2,8 +2,12 @@ package controller;
 import view.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
@@ -37,66 +41,51 @@ import javafx.fxml.FXML;
 
 public class StockOrganizer {
 
-
-  @FXML // ResourceBundle that was given to the FXMLLoader
+  @FXML
   private ResourceBundle resources;
 
-  @FXML // URL location of the FXML file that was given to the FXMLLoader
+  @FXML
   private URL location;
 
-  @FXML // fx:id="btnName"
-  private RadioButton btnName; // Value injected by FXMLLoader
-
-  @FXML // fx:id="btnType"
-  private RadioButton btnType; // Value injected by FXMLLoader
-
-  @FXML // fx:id="screen"
-  private ListView<?> screen; // Value injected by FXMLLoader
-
-  @FXML // fx:id="searchToggle"
-  private ToggleGroup searchToggle; // Value injected by FXMLLoader
-
-  @FXML // fx:id="tabAddToy"
-  private Tab tabAddToy; // Value injected by FXMLLoader
-
-  @FXML // fx:id="tabHome"
-  private Tab tabHome; // Value injected by FXMLLoader
-
-  @FXML // fx:id="tabRemoveToy"
-  private Tab tabRemoveToy; // Value injected by FXMLLoader
-
-  @FXML // fx:id="textFeildName"
-  private TextField textFeildName; // Value injected by FXMLLoader
-
-  @FXML // fx:id="textFeildSN"
-  private TextField textFeildSN; // Value injected by FXMLLoader
-
-  @FXML // fx:id="textFeildType"
-  private TextField textFeildType; // Value injected by FXMLLoader
+  @FXML
+  private TextField TextFeildName;
 
   @FXML
-  void btnOnClick(ActionEvent event) {
-
-  }
+  private TextField TextFeildSN;
 
   @FXML
-  void readTextFeild(ActionEvent event) {
+  private TextField TextFeildType;
 
-  }
+  @FXML
+  private Button btnSearch;
+
+  @FXML
+  private Label lblName;
+
+  @FXML
+  private Label lblSN;
+
+  @FXML
+  private Label lblType;
+
+  @FXML
+  private ListView<Toy> listviewToySearch;
+
+  @FXML
+  private RadioButton rbName;
+
+  @FXML
+  private RadioButton rbSerialNum;
+
+  @FXML
+  private RadioButton rbType;
+
+  @FXML
+  private ToggleGroup tgSearch;
 
   @FXML // This method is called by the FXMLLoader when initialization is complete
   public void initialize() {
-      assert btnName != null : "fx:id=\"btnName\" was not injected: check your FXML file 'Assignment3_SceneBuilder.fxml'.";
-      assert btnType != null : "fx:id=\"btnType\" was not injected: check your FXML file 'Assignment3_SceneBuilder.fxml'.";
-      assert screen != null : "fx:id=\"screen\" was not injected: check your FXML file 'Assignment3_SceneBuilder.fxml'.";
-      assert searchToggle != null : "fx:id=\"searchToggle\" was not injected: check your FXML file 'Assignment3_SceneBuilder.fxml'.";
-      assert tabAddToy != null : "fx:id=\"tabAddToy\" was not injected: check your FXML file 'Assignment3_SceneBuilder.fxml'.";
-      assert tabHome != null : "fx:id=\"tabHome\" was not injected: check your FXML file 'Assignment3_SceneBuilder.fxml'.";
-      assert tabRemoveToy != null : "fx:id=\"tabRemoveToy\" was not injected: check your FXML file 'Assignment3_SceneBuilder.fxml'.";
-      assert textFeildName != null : "fx:id=\"textFeildName\" was not injected: check your FXML file 'Assignment3_SceneBuilder.fxml'.";
-      assert textFeildSN != null : "fx:id=\"textFeildSN\" was not injected: check your FXML file 'Assignment3_SceneBuilder.fxml'.";
-      assert textFeildType != null : "fx:id=\"textFeildType\" was not injected: check your FXML file 'Assignment3_SceneBuilder.fxml'.";
-
+      
   
   }
 
@@ -110,14 +99,29 @@ public class StockOrganizer {
   // private String Result;// Creating string to save each result of correctly matched toys
   // private String toyString;// String to print each type of object with whole scope to avoid loop
   // scope error
-  private AppMenu menu = new view.AppMenu();// Declaring and instantiating appMenu object
+  private AppMenu menu = new AppMenu();// Declaring and instantiating appMenu object
   Scanner input = new Scanner(System.in);// creating a scanner to read the users choice
 
-  
+
   /**
    * Constuctor for initializing program
+   * @throws Exception 
    */
-  public StockOrganizer() {
+  public StockOrganizer() throws Exception {
+    
+    database = new File(DB_PATH);
+     // Start menu functionality
+loadStockDB();
+
+    //    launchApp();
+//    if (rbName.isSelected()) {
+//      
+//    }else if (rbSerialNum.isSelected()) {
+//      
+//    } else {
+//      //Toy Type
+//      
+//    }
 
 //    try {
 //      //fh = new FileHandler("res/log.txt");
@@ -292,10 +296,17 @@ public class StockOrganizer {
           }
         }
       }
+      
       stockReader.close(); // Closing database reader
       // System.out.println(stock);
 
     }
+  }
+  
+  @FXML
+  void btnSearchHandler(ActionEvent event) {
+    ObservableList <Toy> toys = FXCollections.observableArrayList(stock);
+    listviewToySearch.getItems().addAll(toys);
   }
 
   public void searchDatabase() {
