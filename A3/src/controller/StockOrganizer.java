@@ -1,4 +1,5 @@
 package controller;
+
 import view.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,9 +12,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-//import java.util.*;
+// import java.util.*;
 
 
 import model.Figure;
@@ -40,13 +42,6 @@ import javafx.fxml.FXML;
 
 
 public class StockOrganizer {
-
-  @FXML
-  private ResourceBundle resources;
-
-  @FXML
-  private URL location;
-
   @FXML
   private TextField TextFeildName;
 
@@ -57,10 +52,22 @@ public class StockOrganizer {
   private TextField TextFeildType;
 
   @FXML
+  private Button btnBuy;
+
+  @FXML
+  private Button btnClear;
+
+  @FXML
+  private Button btnRemove;
+
+  @FXML
   private Button btnSearch;
 
   @FXML
   private Label lblName;
+
+  @FXML
+  private Label lblRemoveSN;
 
   @FXML
   private Label lblSN;
@@ -72,6 +79,9 @@ public class StockOrganizer {
   private ListView<Toy> listviewToySearch;
 
   @FXML
+  private ListView<Toy> lvRemoveToy;
+
+  @FXML
   private RadioButton rbName;
 
   @FXML
@@ -81,18 +91,34 @@ public class StockOrganizer {
   private RadioButton rbType;
 
   @FXML
-  private ToggleGroup tgSearch;
+  private Tab tabAddToy;
 
-  @FXML // This method is called by the FXMLLoader when initialization is complete
-  public void initialize() {
-      
+  @FXML
+  private TabPane tabMenu;
+
+  @FXML
+  private Tab tabRemoveToy;
+
+  @FXML
+  private Tab tabSearch = new Tab();
+
+  @FXML
+  private TextField textFeildSerialNumber;
+
+  @FXML
+  private ToggleGroup tgSearch = new ToggleGroup();
   
-  }
+  
+
+//  @FXML // This method is called by the FXMLLoader when initialization is complete
+//  public void initialize() {
+//
+//  }
 
 
-//  private java.util.logging.Logger LOGR =
-//      java.util.logging.Logger.getLogger(StockOrganizer.class.getName());
-//  private FileHandler fh;
+  // private java.util.logging.Logger LOGR =
+  // java.util.logging.Logger.getLogger(StockOrganizer.class.getName());
+  // private FileHandler fh;
   private final String DB_PATH = "res/toys.txt"; // This is saved game data location
   private File database;// Declaring a file object
   private ArrayList<Toy> stock = new ArrayList<>();// Creating a stock inventory array list
@@ -105,42 +131,138 @@ public class StockOrganizer {
 
   /**
    * Constuctor for initializing program
-   * @throws Exception 
+   * 
+   * @throws Exception
    */
   public StockOrganizer() throws Exception {
-    
+  
+
     database = new File(DB_PATH);
-     // Start menu functionality
-loadStockDB();
+    // Start menu functionality
+    loadStockDB();
 
-    //    launchApp();
-//    if (rbName.isSelected()) {
-//      
-//    }else if (rbSerialNum.isSelected()) {
-//      
-//    } else {
-//      //Toy Type
-//      
-//    }
+    // launchApp();
+    // if (rbName.isSelected()) {
+    //
+    // }else if (rbSerialNum.isSelected()) {
+    //
+    // } else {
+    // //Toy Type
+    //
+    // }
 
-//    try {
-//      //fh = new FileHandler("res/log.txt");
-//      //fh.setLevel(Level.FINE);
-//      //fh.setFormatter(new SimpleFormatter());
-//     // LOGR.addHandler(fh);
-//    } catch (SecurityException e) {
-//      // TODO Auto-generated catch block
-//
-//      e.printStackTrace();
-//    }
-//
-//
-//    stock = new ArrayList<Toy>();
-//    database = new File(DB_PATH);
-//    this.menu = new AppMenu(); // Start menu functionality
-//    launchApp();
+    // try {
+    // //fh = new FileHandler("res/log.txt");
+    // //fh.setLevel(Level.FINE);
+    // //fh.setFormatter(new SimpleFormatter());
+    // // LOGR.addHandler(fh);
+    // } catch (SecurityException e) {
+    // // TODO Auto-generated catch block
+    //
+    // e.printStackTrace();
+    // }
+    //
+    //
+    // stock = new ArrayList<Toy>();
+    // database = new File(DB_PATH);
+    // this.menu = new AppMenu(); // Start menu functionality
+    // launchApp();
+  }
+  
+  @FXML
+  void addToyHandler(ActionEvent event) {
+    if (tabMenu.getSelectionModel().equals(tabAddToy)){
+      
+    }
+
+  }
+  
+  @FXML
+  void searchPaneHandler(ActionEvent event) {
+    if (tabMenu.getSelectionModel().equals(tabSearch)) {
+      if(btnSearch.isPressed()) {
+        btnSearchHandler(event);
+      } else if (btnClear.isPressed()) {
+        btnClearHandler(event);
+      } else {
+        btnBuyHandler(event);
+      }
+    }
+
+  }
+  
+  
+  @FXML
+  void removeToyHandler(ActionEvent event) {
+
   }
 
+  @FXML 
+  void btnBuyHandler (ActionEvent event){
+    tabMenu.getSelectionModel().select(tabRemoveToy);
+//    System.out.println( tabMenu.getSelectionModel().getSelectedItem().toString());
+//   
+//    System.out.print(listviewToySearch.getSelectionModel().toString());
+//    var toy;
+//    ArrayList<Toy> copyList = new ArrayList<>();// purchasing array List
+//    for (Toy aToy : stock) {
+//    int chosenItem = input.nextInt();// Saving the input as a variable
+//    int correctItemIndex = chosenItem - 1;// Variable for fixing the true index from printed list
+//    if (chosenItem <= copyList.size()) {// if less than the array list size it will sub the
+//                                        // available count
+//
+//      Toy theItemToy = copyList.get(correctItemIndex);// saves an object from the copy array list
+//
+//      int indexInStockArray = stock.indexOf(theItemToy);// finds the index of where the purchased
+//                                                        // toy is in the
+//                                                        // main stock inventory
+//      if (stock.contains(chosenItem)) {// if it contains the item then...
+//
+//        stock.remove(indexInStockArray);// remove the old version
+//      }
+//
+//      theItemToy.deacreseQuanity();// sub stock count
+
+      //stock.add(theItemToy);// add the new toy to the stock inventory
+    
+//    
+//  }
+//   
+//  }
+  }
+  @FXML
+  void initialize() {
+    tabAddToy = new Tab ();
+    //tabAddToy.setContent();
+    tabRemoveToy = new Tab ();
+    tabSearch  =  new Tab();
+      tabMenu = new TabPane();
+    tabMenu.getTabs().addAll(tabRemoveToy);
+    tabMenu.getTabs().addAll(tabSearch);
+    tabMenu.getTabs().addAll(tabAddToy);
+    tabMenu.setContextMenu(null);
+    
+
+  }
+
+  private void goSearch() {
+    tabMenu.getSelectionModel().selectNext();
+//    tabMenu.getSelectionModel().select(tabRemoveToy);
+    
+  }
+  @FXML
+  void btnClearHandler (ActionEvent event) {
+    tabMenu.getSelectionModel().select(tabRemoveToy);
+ System.out.println(tabMenu.getTabs().toString());   
+    if (event.getSource().equals(btnClear)) {
+     listviewToySearch.getItems().clear();
+  }
+  }
+  @FXML 
+  void removeHandler (ActionEvent event) {
+    System.out.println( textFeildSerialNumber.getText());
+   
+  }
   /**
    * This method launches the application
    */
@@ -182,6 +304,7 @@ loadStockDB();
       }
     }
   }
+
 
   /**
    * This program reads the stock inventory file and creates an array for later processing
@@ -296,18 +419,60 @@ loadStockDB();
           }
         }
       }
-      
+
       stockReader.close(); // Closing database reader
       // System.out.println(stock);
 
     }
   }
   
+  @FXML 
+  void RemoveHandler (ActionEvent event) {
+    
+  }
+
   @FXML
   void btnSearchHandler(ActionEvent event) {
-    ObservableList <Toy> toys = FXCollections.observableArrayList(stock);
-    listviewToySearch.getItems().addAll(toys);
+    tabMenu = new TabPane();
+   
+    lblName = new Label();
+    lblSN = new Label();
+    lblType = new Label();
+    System.out.println(lblType.getText());
+    System.out.println(lblName.getText());
+    System.out.println(lblType.getText());
+    tgSearch = new ToggleGroup();
+    rbName.setToggleGroup(tgSearch);
+    rbSerialNum.setToggleGroup(tgSearch);
+    rbType.setToggleGroup(tgSearch);
+    
+    if (event.getSource().equals(btnSearch)) {
+      if(tgSearch.getSelectedToggle().equals(rbName)) {
+        System.out.println(lblName.getText());
+        
+      // String name = lblName.getText();
+      searchByNameLV();
+      } else if (tgSearch.getSelectedToggle().equals(rbSerialNum)) {
+        System.out.println(lblSN.getText());
+        
+      String serialNumber = lblSN.getText();//0getText();
+      searchSerialNumberLV();
+
+    } else {
+      String type = lblType.getText();
+      System.out.println(lblType.getText());
+      searchByTypeLV();
+    }
+
   }
+    else {
+//      System.exit(0);
+    }
+    goSearch();
+  }
+  
+
+
 
   public void searchDatabase() {
     System.out.println();
@@ -332,7 +497,7 @@ loadStockDB();
       // if this choice search by type
       case 3: {
         String userSearchType = menu.promptType();
-        searchByType("" + userSearchType + "");
+        //searchByType("" + userSearchType + "");
         input.nextLine();
         break;
       }
@@ -520,6 +685,57 @@ loadStockDB();
 
   }
 
+  public void searchByNameLV() {
+    listviewToySearch.getItems().clear();
+   
+    
+    ArrayList<Toy> copyList = new ArrayList<>();
+     ObservableList<Toy> toys = FXCollections.observableArrayList(copyList);
+    
+    for (Toy aToy : stock) {
+      aToy.getName();// Getting the name of the toy
+      if (aToy.getName().matches(".*(?i:" + TextFeildName.getText().toString() + ").*")) {// if the name contains the keyword then
+        
+                                                            // it will add
+             
+        // it to the purchasing list
+        
+        listviewToySearch.getItems().addAll(aToy);
+
+
+      }
+    }
+
+  }
+
+  public void searchByTypeLV() {
+    
+    searchByType();
+    
+  }
+
+
+  public void searchSerialNumberLV() {
+    
+   // listviewToySearch.getItems().clear();
+    ArrayList<Toy> copyList = new ArrayList<>();// Array list to store all toys with same serial
+    // number for
+    // purchasing
+    Toy line;// Creating a toy object
+    int counter = 1; // Making a counter for selecting the object to remove
+    for (int i = 0; i < stock.size(); i++) {
+
+      line = stock.get(i);// saving the toy to the latest stock index
+      if (line.getSerialNum().equals( TextFeildSN.getText().toString())) {// if the serial numbers match print it
+
+        // user identify
+        listviewToySearch.getItems().addAll(line); // the item they want to purchase
+        copyList.add(line);// adding the line to the purchasing array
+      }
+
+    }
+  }
+
   /**
    * Searches inventory Array List for an item with the same parameter serial number
    * 
@@ -538,7 +754,7 @@ loadStockDB();
       if (line.getSerialNum().equals(userChoice)) {// if the serial numbers match print it
         System.out.println(" (" + counter + ") " + line);// print out the line with number to help
                                                          // user identify
-                                                         // the item they want to purchase
+        listviewToySearch.getItems().addAll(line); // the item they want to purchase
         copyList.add(line);// adding the line to the purchasing array
       }
     }
@@ -584,6 +800,7 @@ loadStockDB();
    * @param name Product Name Keyword
    */
   public void searchByName(String name) {
+    
     int counter = 1;// Making a counter for selecting the object to remove
     ArrayList<Toy> copyList = new ArrayList<>();// purchasing array List
     for (Toy aToy : stock) {
@@ -591,6 +808,8 @@ loadStockDB();
       if (aToy.getName().matches(".*(?i:" + name + ").*")) {// if the name contains the keyword then
                                                             // it will add
                                                             // it to the purchasing list
+        listviewToySearch.getItems().add(aToy);
+
         copyList.add(aToy);// Add toy to purchasing list
       }
     }
@@ -637,18 +856,20 @@ loadStockDB();
    * 
    * @param type the type of toy that the user wants to search for
    */
-  public void searchByType(String type) {
-    char userSearchType = type.toLowerCase().charAt(0); // saves first character of parameter to
+  public void searchByType() {
+    //listviewToySearch.getItems().clear();
+    
+    char userSearchType = TextFeildType.getText().toLowerCase().toString().charAt(0); // saves first character of parameter to
                                                         // handle search Type
     if (userSearchType == 'f') {// if the parameter starts with f it will read all figures
-      readFigures();
+      readFiguresLV();
     } else if (userSearchType == 'a') {// if the parameter starts with a it will read all animals
-      readAnimals();
+      readAnimalsLV();
     } else if (userSearchType == 'p') { // if the parameter starts with p it will read all puzzles
-      readPuzzles();
+      readPuzzleLV();
 
     } else {
-      readBoardgames();// if the parameter starts with f it will read all boardgames
+      readBoradgamesLV();// if the parameter starts with f it will read all boardgames
     }
 
   }
@@ -657,18 +878,23 @@ loadStockDB();
    * Prints all figurings
    */
   public void readFigures() {
+   
+    
     int counter = 1;// Making a counter for selecting the object to remove
     int i = 1;
     ArrayList<Toy> copyList = new ArrayList<>();// purchasing array List
+    ObservableList<Toy> toys = FXCollections.observableArrayList(copyList);
     for (Toy aRandomToy : stock) {//
       if (aRandomToy instanceof Figure) {// prints any toys that are figures
 
-        System.out.println("   (" + i + ") " + aRandomToy);// printing figures to console
+        //System.out.println("   (" + i + ") " + aRandomToy);// printing figures to console
         i++;// increasing counter
         copyList.add(aRandomToy);// adding figure to purchasing count
+      listviewToySearch.getItems().add(aRandomToy);
       }
     }
-    // Printing each element of array index to display to user
+   
+     //Printing each element of array index to display to user
     for (int a = 0; i < copyList.size(); i++) {
       System.out.println("\t(" + counter + ")   " + copyList.get(a));
       counter++;
@@ -710,7 +936,9 @@ loadStockDB();
    * Prints all animal toys
    */
   public void readAnimals() {
+    
     ArrayList<Toy> copyList = new ArrayList<>();// purchasing array List
+    ObservableList<Toy> toys = FXCollections.observableArrayList(copyList);
     int i = 1;
     int counter = 1;// Making a counter for selecting the object to remove
     for (Toy aRandomToy : stock) {
@@ -719,48 +947,74 @@ loadStockDB();
         System.out.println("   (" + i + ") " + aRandomToy);// prints out each animall
         i++;// increasing counter
         copyList.add(aRandomToy);// adds animal to purchasing array list
+        toys.add(aRandomToy);
+//        listviewToySearch.getItems().add(aRandomToy);
       }
     }
-    System.out.println();// printing line break
-
-    System.out.println(
-        "Enter an item that you remove or an index higher than last search to go to sub menu: ");// input
-                                                                                                 // prompt
-
-
-    int chosenItem = input.nextInt();// Saving the input as a variable
-    int correctItemIndex = chosenItem - 1;// Variable for fixing the true index from printed list
-    if (chosenItem <= copyList.size()) {// if less than the array list size it will sub the
-                                        // available count
-
-      Toy theItemToy = copyList.get(correctItemIndex);// saves an object from the copy array list
-
-      int indexInStockArray = stock.indexOf(theItemToy);// finds the index of where the purchased
-                                                        // toy is in the
-                                                        // main stock inventory
-      if (stock.contains(chosenItem)) {// if it contains the item then...
-
-        stock.remove(indexInStockArray);// remove the old version
-      }
-
-      theItemToy.deacreseQuanity();// sub stock count
-
-      stock.add(theItemToy);// add the new toy to the stock inventory
-      System.out.println("Please press Enter to contine...");
-      Scanner enterKey = new Scanner(System.in);
-      enterKey.nextLine();// continues if user hits the enter key
-
-    } else {
-      menu.showSubMenu();// if the choice is bigger go back to the sub menu
+    for(Toy toObeservable : copyList) {
+      listviewToySearch.getItems().add(toObeservable);
     }
+//    System.out.println();// printing line break
+//
+//    System.out.println(
+//        "Enter an item that you remove or an index higher than last search to go to sub menu: ");// input
+//                                                                                                 // prompt
+//
+//
+//    int chosenItem = input.nextInt();// Saving the input as a variable
+//    int correctItemIndex = chosenItem - 1;// Variable for fixing the true index from printed list
+//    if (chosenItem <= copyList.size()) {// if less than the array list size it will sub the
+//                                        // available count
+//
+//      Toy theItemToy = copyList.get(correctItemIndex);// saves an object from the copy array list
+//
+//      int indexInStockArray = stock.indexOf(theItemToy);// finds the index of where the purchased
+//                                                        // toy is in the
+//                                                        // main stock inventory
+//      if (stock.contains(chosenItem)) {// if it contains the item then...
+//
+//        stock.remove(indexInStockArray);// remove the old version
+//      }
+//
+//      theItemToy.deacreseQuanity();// sub stock count
+//
+//      stock.add(theItemToy);// add the new toy to the stock inventory
+//      System.out.println("Please press Enter to contine...");
+//      Scanner enterKey = new Scanner(System.in);
+//      enterKey.nextLine();// continues if user hits the enter key
+//
+//    } else {
+//      menu.showSubMenu();// if the choice is bigger go back to the sub menu
+//    }
 
   }
 
+  public void readBoradgamesLV (){
+    ArrayList<Toy> copyList = new ArrayList<>();// purchasing array List
+   
+    ObservableList<Toy> toys = FXCollections.observableArrayList(copyList);
+    int i = 1;
+    for (Toy aRandomToy : stock) {
+      if (aRandomToy instanceof Boardgame) {// prints all toys that are Boardgames
+
+       // System.out.println("   (" + i + ") " + aRandomToy);// pritns each toy with identifier to
+                                                           // console
+        i++;// increase counter
+        //listviewToySearch.addAll(aRandomToy.toString());// adds boardgame to purcahsing array list
+        listviewToySearch.getItems().add(aRandomToy);
+        toys.add(aRandomToy);
+      }
+    }
+    
+  }
   /**
    * Prints all Board games
    */
   public void readBoardgames() {
+    
+   
     ArrayList<Toy> copyList = new ArrayList<>();// purchasing array List
+    ObservableList<Toy> toys = FXCollections.observableArrayList(copyList);
     int i = 1;
     for (Toy aRandomToy : stock) {
       if (aRandomToy instanceof Boardgame) {// prints all toys that are Boardgames
@@ -769,48 +1023,96 @@ loadStockDB();
                                                            // console
         i++;// increase counter
         copyList.add(aRandomToy);// adds boardgame to purcahsing array list
+        listviewToySearch.getItems().add(aRandomToy);
       }
     }
-    System.out.println();// printing line break
-
-    System.out.println(
-        "Enter an item that you remove or an index higher than last search to go to sub menu: ");// input
-                                                                                                 // prompt
-
-
-    int chosenItem = input.nextInt();// Saving the input as a variable
-    int correctItemIndex = chosenItem - 1;// Variable for fixing the true index from printed list
-    if (chosenItem <= copyList.size()) {// if less than the array list size it will sub the
-                                        // available count
-
-      Toy theItemToy = copyList.get(correctItemIndex);// saves an object from the copy array list
-
-      int indexInStockArray = stock.indexOf(theItemToy);// finds the index of where the purchased
-                                                        // toy is in the
-                                                        // main stock inventory
-      if (stock.contains(chosenItem)) {// if it contains the item then...
-
-        stock.remove(indexInStockArray);// remove the old version
-      }
-
-      theItemToy.deacreseQuanity();// sub stock count
-
-      stock.add(theItemToy);// add the new toy to the stock inventory
-
-    } else {
-      menu.showSubMenu();// if the choice is bigger go back to the sub menu
-    }
-    System.out.println("Please press Enter to contine...");
-    Scanner enterKey = new Scanner(System.in);
-    enterKey.nextLine();// continues if user hits the enter key
+//    System.out.println();// printing line break
+//
+//    System.out.println(
+//        "Enter an item that you remove or an index higher than last search to go to sub menu: ");// input
+//                                                                                                 // prompt
+//
+//
+//    int chosenItem = input.nextInt();// Saving the input as a variable
+//    int correctItemIndex = chosenItem - 1;// Variable for fixing the true index from printed list
+//    if (chosenItem <= copyList.size()) {// if less than the array list size it will sub the
+//                                        // available count
+//
+//      Toy theItemToy = copyList.get(correctItemIndex);// saves an object from the copy array list
+//
+//      int indexInStockArray = stock.indexOf(theItemToy);// finds the index of where the purchased
+//                                                        // toy is in the
+//                                                        // main stock inventory
+//      if (stock.contains(chosenItem)) {// if it contains the item then...
+//
+//        stock.remove(indexInStockArray);// remove the old version
+//      }
+//
+//      theItemToy.deacreseQuanity();// sub stock count
+//
+//      stock.add(theItemToy);// add the new toy to the stock inventory
+//
+//    } else {
+//      menu.showSubMenu();// if the choice is bigger go back to the sub menu
+//    }
+//    System.out.println("Please press Enter to contine...");
+//    Scanner enterKey = new Scanner(System.in);
+//    enterKey.nextLine();// continues if user hits the enter key
 
   }
+  public void readPuzzleLV() {
+    ArrayList<Toy> copyList = new ArrayList<>();// purchasing array List
+    ObservableList<Toy> toys = FXCollections.observableArrayList(copyList);
+   // int i = 1;
+    for (Toy aRandomToy : stock) {
+      if (aRandomToy instanceof Puzzle) {// prints all toys that are Boardgames
 
+        //System.out.println("   (" + i + ") " + aRandomToy);// pritns each toy with identifier to
+                                                           // console
+     //   i++;// increase counter
+        copyList.add(aRandomToy);// adds boardgame to purcahsing array list
+        listviewToySearch.getItems().add(aRandomToy);
+      }
+    }
+  }
+public void readFiguresLV() {
+  ArrayList<Toy> copyList = new ArrayList<>();// purchasing array List
+  ObservableList<Toy> toys = FXCollections.observableArrayList(copyList);
+  //int i = 1;
+  for (Toy aRandomToy : stock) {
+    if (aRandomToy instanceof Figure) {// prints all toys that are Boardgames
+
+     // System.out.println("   (" + i + ") " + aRandomToy);// pritns each toy with identifier to
+                                                         // console
+     // i++;// increase counter
+      copyList.add(aRandomToy);// adds boardgame to purcahsing array list
+      listviewToySearch.getItems().add(aRandomToy);
+    }
+  }
+}
+public void readAnimalsLV(){
+  ArrayList<Toy> copyList = new ArrayList<>();// purchasing array List
+  ObservableList<Toy> toys = FXCollections.observableArrayList(copyList);
+  //int i = 1;
+  for (Toy aRandomToy : stock) {
+    if (aRandomToy instanceof Animal) {// prints all toys that are Boardgames
+
+     // System.out.println("   (" + i + ") " + aRandomToy);// pritns each toy with identifier to
+                                                         // console
+     // i++;// increase counter
+      copyList.add(aRandomToy);// adds boardgame to purcahsing array list
+      listviewToySearch.getItems().add(aRandomToy);
+    }
+  }
+}
+  
+  
   /**
    * Prints all puzzles
    */
   public void readPuzzles() {
     ArrayList<Toy> copyList = new ArrayList<>();// purchasig array list
+    ObservableList<Toy> toys = FXCollections.observableArrayList(copyList);
     int i = 1;// counter
     for (Toy aRandomToy : stock) {
 
@@ -819,6 +1121,8 @@ loadStockDB();
                                                            // console
         i++;// counter increase
         copyList.add(aRandomToy);// adding toy to purchasing index
+        toys.add(aRandomToy);
+        listviewToySearch.getItems().add(aRandomToy);
       }
     }
     System.out.println();// printing line break
