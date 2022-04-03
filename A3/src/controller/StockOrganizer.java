@@ -176,6 +176,12 @@ public class StockOrganizer {
     }
 
   }
+  void createTabs() {
+    tabMenu.getTabs().add(tabRemoveToy);
+    tabMenu.getTabs().add(tabAddToy);
+    tabMenu.getTabs().add(tabSearch);
+    
+  }
   
   @FXML
   void searchPaneHandler(ActionEvent event) {
@@ -252,6 +258,7 @@ public class StockOrganizer {
   }
   @FXML
   void btnClearHandler (ActionEvent event) {
+    createTabs();
     tabMenu.getSelectionModel().select(tabRemoveToy);
  System.out.println(tabMenu.getTabs().toString());   
     if (event.getSource().equals(btnClear)) {
