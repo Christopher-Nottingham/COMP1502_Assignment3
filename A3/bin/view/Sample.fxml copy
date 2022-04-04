@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="1091.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StockOrganizer">
+   <children>
+      <TabPane fx:id="tabMenu" prefHeight="663.0" prefWidth="1088.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabSearch" onSelectionChanged="#searchPaneHandler" text="Search">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane prefHeight="605.0" prefWidth="1088.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="134.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.0" minWidth="10.0" prefWidth="194.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.0" minWidth="10.0" prefWidth="136.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="5.0" prefWidth="200.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="203.0" minWidth="0.0" prefWidth="146.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="417.0" minWidth="10.0" prefWidth="229.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.0" minWidth="10.0" prefWidth="26.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="316.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="226.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="308.0" minHeight="10.0" prefHeight="112.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="234.0" minHeight="10.0" prefHeight="129.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="135.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <TextField fx:id="TextFeildSN" promptText="Enter Serial Number Here" translateY="32.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <HBox prefHeight="38.0" prefWidth="284.0" spacing="10.0" translateY="43.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                 <children>
+                                    <RadioButton fx:id="rbSerialNum" mnemonicParsing="false" text="Serial Number">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="tgSearch" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="rbType" mnemonicParsing="false" text="Toy Type" toggleGroup="$tgSearch" />
+                                    <RadioButton fx:id="rbName" mnemonicParsing="false" text="Name" toggleGroup="$tgSearch" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                                 <opaqueInsets>
+                                    <Insets left="10.0" />
+                                 </opaqueInsets>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </HBox>
+                              <TextField fx:id="TextFeildType" promptText="Enter Type Here" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="TextFeildName" promptText="Enter Name Here" translateY="-32.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <ListView fx:id="listviewToySearch" prefHeight="502.0" prefWidth="486.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.rowSpan="3" />
+                              <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#btnSearchHandler" text="Search" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="lblName" text="Name" translateY="-32.0" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="606.0" text="Welcome to Toy Store Company" textAlignment="CENTER" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnBuy" mnemonicParsing="false" onAction="#btnBuyHandler" text="Buy" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                              <Button fx:id="btnClear" mnemonicParsing="false" onAction="#btnClearHandler" prefHeight="22.0" prefWidth="67.0" text="Clear" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <Label fx:id="lblSN" text="Serial Numer (SN)" translateY="32.0" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="lblType" text="Type" GridPane.rowIndex="3">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="Search Inventory: " translateY="-28.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tabAddToy" closable="false" onSelectionChanged="#addToyHandler" text="Add  Toy">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane layoutY="-5.0" prefHeight="650.0" prefWidth="1104.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label prefHeight="37.0" prefWidth="354.0" text="Enter New Toy Information" translateX="17.0" translateY="-32.0" GridPane.rowSpan="2">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="tabRemoveToy" closable="false" onSelectionChanged="#removeToyHandler" text="Remove Toy">
+               <content>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="499.931640625" minWidth="10.0" prefWidth="499.931640625" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="635.6123046875" minWidth="10.0" prefWidth="255.068359375" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="544.0" minWidth="10.0" prefWidth="218.12017822265625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="463.35968017578125" minWidth="0.0" prefWidth="0.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ListView fx:id="lvRemoveToy" opacity="0.77" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3" />
+                        <Button fx:id="btnRemove" mnemonicParsing="false" onAction="#removeHandler" prefHeight="46.0" prefWidth="131.0" text="Remove" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Button>
+                        <GridPane GridPane.rowIndex="2">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <TextField fx:id="textFeildSerialNumber" prefHeight="37.0" prefWidth="251.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                 <padding>
+                                    <Insets left="-32.0" right="28.0" />
+                                 </padding>
+                                 <rotationAxis>
+                                    <Point3D />
+                                 </rotationAxis>
+                              </TextField>
+                              <Label fx:id="lblRemoveSN" prefHeight="39.0" prefWidth="213.0" text="Serial Number" GridPane.columnSpan="2">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <Separator layoutX="52.0" prefHeight="7.0" prefWidth="409.0" translateY="-79.0" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets right="46.0" />
+                           </GridPane.margin>
+                        </Separator>
+                        <Label text="Enter Toy Serial Number">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
