@@ -200,12 +200,33 @@ public class StockOrganizer {
   
   @FXML
   void removeToyHandler(ActionEvent event) {
+    ArrayList<Toy> copyList = new ArrayList<>();// purchasing array List
+    for (Toy aToy : stock) {
+      
+    //int chosenItem = textFeildSerialNumber.getText();// Saving the input as a variable
+   // int correctItemIndex = chosenItem - 1;// Variable for fixing the true index from printed list
+//    if (chosenItem <= copyList.size()) {// if less than the array list size it will sub the
+//                                        // available count
+//
+//      Toy theItemToy = copyList.get(correctItemIndex);// saves an object from the copy array list
+//
+//      int indexInStockArray = stock.indexOf(theItemToy);// finds the index of where the purchased
+//                                                        // toy is in the
+//                                                        // main stock inventory
+//      if (stock.contains(chosenItem)) {// if it contains the item then...
+//
+//        stock.remove(indexInStockArray);// remove the old version
+//      }
+  }
 
   }
+//  }
 
   @FXML 
   void btnBuyHandler (ActionEvent event){
-    tabMenu.getSelectionModel().select(tabRemoveToy);
+    //tabMenu.getSelectionModel().select(tabRemoveToy);
+    Toy lvSelected = listviewToySearch.getSelectionModel().getSelectedItem();
+    lvSelected.deacreseQuanity();
 //    System.out.println( tabMenu.getSelectionModel().getSelectedItem().toString());
 //   
 //    System.out.print(listviewToySearch.getSelectionModel().toString());
@@ -228,9 +249,9 @@ public class StockOrganizer {
 //      }
 //
 //      theItemToy.deacreseQuanity();// sub stock count
-
-      //stock.add(theItemToy);// add the new toy to the stock inventory
-    
+//
+//      stock.add(theItemToy);// add the new toy to the stock inventory
+//    
 //    
 //  }
 //   
