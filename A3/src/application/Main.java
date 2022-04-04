@@ -15,7 +15,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-		  
+		  g
 		  
 		  TabPane root = (TabPane)FXMLLoader.load(getClass().getResource("/view/Untitled.fxml"));
 //			BorderPane root = new BorderPane();
