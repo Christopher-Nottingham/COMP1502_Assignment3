@@ -19,6 +19,8 @@ import javafx.scene.control.ToggleGroup;
 
 
 import model.Figure;
+
+import exceptions.*;
 import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -89,6 +91,8 @@ public class StockOrganizer {
 
   @FXML
   private RadioButton rbType;
+  
+  private boolean isFound;
 
   @FXML
   private Tab tabAddToy;
@@ -200,9 +204,11 @@ public class StockOrganizer {
   
   @FXML
   void removeToyHandler(ActionEvent event) {
-    ArrayList<Toy> copyList = new ArrayList<>();// purchasing array List
-    for (Toy aToy : stock) {
-      
+//    String serialNum = textFeildSerialNumber.getText();
+//    lvRemoveToy 
+//    ArrayList<Toy> copyList = new ArrayList<>();// purchasing array List
+//    for (Toy aToy : stock) {
+//      
     //int chosenItem = textFeildSerialNumber.getText();// Saving the input as a variable
    // int correctItemIndex = chosenItem - 1;// Variable for fixing the true index from printed list
 //    if (chosenItem <= copyList.size()) {// if less than the array list size it will sub the
@@ -219,7 +225,7 @@ public class StockOrganizer {
 //      }
   }
 
-  }
+//  }
 //  }
 
   @FXML 
@@ -288,7 +294,10 @@ public class StockOrganizer {
   }
   @FXML 
   void removeHandler (ActionEvent event) {
-    System.out.println( textFeildSerialNumber.getText());
+    //System.out.println( textFeildSerialNumber.getText());
+    removeToy();
+    
+    
    
   }
   /**
@@ -642,11 +651,83 @@ public class StockOrganizer {
     }
   }
 
+//  /**
+//   * This method prompts for a Serial number and if located prompts for removal confirmation,
+//   * otherwise, prompts that no such serial is found
+//   */
+//  private void removeToy() {
+//    boolean isFound = true;
+//    String serialNum = "0";
+//    int productIndex = 0;
+//
+//    /*
+//     * serialNum acting as its own flag
+//     */
+//    while (serialNum == "0") {
+//
+//      /*
+//       * Prompt User for input
+//       */
+//      String userInput = textFeildSerialNumber.getText();
+//      if (isValidSN(userInput, false)) {
+//        serialNum = userInput;
+//      }
+//
+//      /*
+//       * Attempt locating serial number in database
+//       */
+//      for (Toy product : stock) {
+//
+//        if (product.getSerialNum() == serialNum) {
+//          productIndex = stock.indexOf(product);
+//        } else {
+//          isFound = false;
+//        }
+//      }
+//
+//      if (isFound) {
+//        char choice = menu.displayItemRemoval(stock.get(productIndex));
+//
+//        if (choice == 'y') {
+//          System.out.println("Item removed!");
+//          stock.remove(productIndex);
+//        } else {
+//          try {
+//            throw new InputValidationException("Serial number: " + serialNum + " not found!");
+//          } catch (InputValidationException e) {
+//            System.out.println(e.getMessage());
+//          }
+//        }
+//      }
+//    }
+//
+//
+//  }
   /**
    * This method prompts for a Serial number and if located prompts for removal confirmation,
    * otherwise, prompts that no such serial is found
    */
   private void removeToy() {
+    for (Toy toy : stock) {
+      String userInput = textFeildSerialNumber.getText();
+      if (isValidSN(userInput, false)) {
+        String serialNum = userInput;}
+      if (toy.getSerialNum().equals(userInput.toString())) {
+        int index = stock.indexOf(toy);
+       // System.out.println(stock.get(index));
+        lvRemoveToy.getItems().add(toy);
+        stock.remove(index);
+        //System.out.println(stock.get(index));
+        
+      
+      }
+    }
+    //Read reach line of stock
+    //get serial number of each toy
+    //if match, get the index
+    //remove the index
+    //else repeat
+    
     boolean isFound = true;
     String serialNum = "0";
     int productIndex = 0;
@@ -659,7 +740,7 @@ public class StockOrganizer {
       /*
        * Prompt User for input
        */
-      String userInput = menu.promptSerialNum();
+      String userInput = textFeildSerialNumber.getText();
       if (isValidSN(userInput, false)) {
         serialNum = userInput;
       }
@@ -691,9 +772,66 @@ public class StockOrganizer {
         }
       }
     }
+//    //ArrayList<Toy> copyList = new ArrayList<>();// purchasing array List
+//    ObservableList<Toy> toys = FXCollections.observableArrayList(stock);
+//    
+//    //Toy aToyToRemove;
+//    System.out.println(toys.toString()); 
+//    boolean isFound = true;
+//    String serialNum = "0";
+//    int productIndex = 0;
+//
+//    /*
+//     * serialNum acting as its own flag
+//     */
+//    while (serialNum == "0") {
+//
+//      /*
+//       * Prompt User for input
+//       */
+//      String userInput = textFeildSerialNumber.getText();
+//      if (isValidSN(userInput, false)) {
+//        serialNum = userInput;
+//      }
+//
+//      /*
+//       * Attempt locating serial number in database
+//       */
+//      for (Toy product : stock) {
+//        lvRemoveToy.getItems().add(product);
+//        if (product.getSerialNum() == serialNum) {
+//          productIndex = stock.indexOf(product);
+//          //copyList.add(product);
+//          toys.add(product);
+//          System.out.println(toys.toString());
+//          System.out.println(product);
+//          lvRemoveToy.getItems().add(product);
+//          stock.remove(productIndex);
+//        } else {
+//          isFound = false;
+//          System.out.println(product);
+//        }
+      }
+
+//      if (isFound) {
+//        System.out.println(productIndex);
+//        char choice = menu.displayItemRemoval(stock.get(productIndex));
+//
+//        if (choice == 'y') {
+//          System.out.println("Item removed!");
+//          
+//        } else {
+//          try {
+//            throw new InputValidationException("Serial number: " + serialNum + " not found!");
+//          } catch (InputValidationException e) {
+//            System.out.println(e.getMessage());
+//          }
+//        }
+//      }
+    //}
 
 
-  }
+  //}
 
   public void saveProgram() {
 
@@ -714,11 +852,11 @@ public class StockOrganizer {
   }
 
   public void searchByNameLV() {
-    listviewToySearch.getItems().clear();
+    
    
     
-    ArrayList<Toy> copyList = new ArrayList<>();
-     ObservableList<Toy> toys = FXCollections.observableArrayList(copyList);
+   ;
+     //ObservableList<Toy> toys = FXCollections.observableArrayList(copyList);
     
     for (Toy aToy : stock) {
       aToy.getName();// Getting the name of the toy
