@@ -1,13 +1,19 @@
 package controller;
 
-import view.*;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+// import java.util.*;
+import exceptions.InputValidationException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -15,22 +21,12 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-// import java.util.*;
-import exceptions.*;
-import java.io.Console;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.System.Logger;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.*;
-import model.*;
-import view.*;
-import exceptions.*;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import model.Animal;
+import model.Boardgame;
+import model.Figure;
+import model.Puzzle;
+import model.Toy;
+import view.AppMenu;
 
 /**
  * This program is used to run a store inventory, that can search/remove/add and save all stock
@@ -91,7 +87,52 @@ public class StockOrganizer {
 
 
   @FXML
-  private Tab tabAddToy;// Add Tab
+  private Tab tabAddToy;// Add Tab - Add Toy Tab Scene/View
+
+  @FXML
+  private ChoiceBox<String> chBoxAddCategory; // Add Tab - Choice Box
+
+  @FXML
+  private TextField TextFieldAddSN; // Add Tab - TextField (Serial Number)
+
+  @FXML
+  private TextField TextFieldAddName; // Add Tab - TextField (Name)
+
+  @FXML
+  private TextField TextFieldAddBrand; // Add Tab - TextField (Brand)
+
+  @FXML
+  private TextField TextFieldAddPrice; // Add Tab - TextField (Price)
+
+  @FXML
+  private TextField TextFieldAddCount; // Add Tab - TextField (Available Count)
+
+  @FXML
+  private TextField TextFieldAddAge; // Add Tab - TextField (Age Appropriate)
+
+  @FXML
+  private Button btnSave; // Add Tab - Button (Save)
+
+  @FXML
+  private TextField TextFieldAddClass; // Add Tab - TextField (Classification)
+
+  @FXML
+  private TextField TextFieldAddMaterial; // Add Tab - TextField (Material)
+
+  @FXML
+  private TextField TextFieldAddSize; // Add Tab - TextField (Size)
+
+  @FXML
+  private TextField TextFieldAddType; // Add Tab - TextField (Type)
+
+  @FXML
+  private TextField TextFieldAddMinPlayers; // Add Tab - TextField (Minimum Number of Players)
+
+  @FXML
+  private TextField TextFieldAddMaxPlayers; // Add Tab - TextField (Maximum Number of Players)
+
+  @FXML
+  private TextField TextFieldAddDesigners; // Add Tab - TextField (Designers)
 
   @FXML
   private TabPane tabMenu; // The tab pane for switching tabs
@@ -134,7 +175,7 @@ public class StockOrganizer {
    * 
    * @param event
    */
-  void addToyHandler(ActionEvent event) {
+  void btnSaveHandler(ActionEvent event) {
 
 
   }

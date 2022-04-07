@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
@@ -16,6 +17,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <TabPane fx:id="tabMenu" prefHeight="663.0" prefWidth="1088.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StockOrganizer">
@@ -36,6 +38,7 @@
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="316.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="226.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="308.0" minHeight="10.0" prefHeight="112.0" vgrow="SOMETIMES" />
@@ -43,8 +46,8 @@
                         <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="135.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <TextField fx:id="TextFeildSN" promptText="Enter Serial Number Here" translateY="32.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <HBox prefHeight="38.0" prefWidth="284.0" spacing="10.0" translateY="43.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                        <TextField fx:id="TextFeildSN" promptText="Enter Serial Number Here" translateY="32.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <HBox prefHeight="38.0" prefWidth="284.0" spacing="10.0" translateY="43.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                            <children>
                               <RadioButton fx:id="rbSerialNum" mnemonicParsing="false" text="Serial Number">
                                  <toggleGroup>
@@ -64,11 +67,11 @@
                               <Insets left="10.0" />
                            </GridPane.margin>
                         </HBox>
-                        <TextField fx:id="TextFeildType" promptText="Enter Type Here" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <TextField fx:id="TextFeildName" promptText="Enter Name Here" translateY="-32.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <ListView fx:id="listviewToySearch" prefHeight="502.0" prefWidth="486.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.rowSpan="3" />
-                        <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#btnSearchHandler" text="Search" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="lblName" text="Name" translateY="-32.0" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                        <TextField fx:id="TextFeildType" promptText="Enter Type Here" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="TextFeildName" promptText="Enter Name Here" translateY="-32.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <ListView fx:id="listviewToySearch" prefHeight="502.0" prefWidth="486.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="3" />
+                        <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#btnSearchHandler" text="Search" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="lblName" text="Name" translateY="-32.0" GridPane.halignment="LEFT" GridPane.rowIndex="4">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
@@ -78,9 +81,9 @@
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnBuy" mnemonicParsing="false" onAction="#btnBuyHandler" text="Buy" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-                        <Button fx:id="btnClear" mnemonicParsing="false" onAction="#btnClearHandler" prefHeight="22.0" prefWidth="67.0" text="Clear" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                        <Label fx:id="lblSN" text="Serial Numer (SN)" translateY="32.0" GridPane.rowIndex="3">
+                        <Button fx:id="btnBuy" mnemonicParsing="false" onAction="#btnBuyHandler" text="Buy" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                        <Button fx:id="btnClear" mnemonicParsing="false" onAction="#btnClearHandler" prefHeight="22.0" prefWidth="67.0" text="Clear" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <Label fx:id="lblSN" text="Serial Numer (SN)" translateY="32.0" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
@@ -88,12 +91,12 @@
                               <Insets left="10.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="lblType" text="Type" GridPane.rowIndex="3">
+                        <Label fx:id="lblType" text="Type" GridPane.rowIndex="4">
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                         </Label>
-                        <Label text="Search Inventory: " translateY="-28.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                        <Label text="Search Inventory: " translateY="-28.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -104,6 +107,7 @@
                               <Font size="30.0" />
                            </font>
                         </Label>
+                        <Separator GridPane.columnSpan="7" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
@@ -114,25 +118,401 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <GridPane layoutY="-5.0" prefHeight="650.0" prefWidth="1104.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
+                  <GridPane alignment="BOTTOM_CENTER" layoutY="14.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="399.0" minWidth="10.0" prefWidth="342.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="0.0" prefWidth="19.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="432.0" minWidth="10.0" prefWidth="355.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="0.0" prefWidth="20.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="350.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="134.0" minHeight="10.0" prefHeight="134.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="59.0" minHeight="3.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="135.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="40.0" minHeight="7.0" prefHeight="7.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="81.0" minHeight="10.0" prefHeight="81.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
+                        <RowConstraints maxHeight="29.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="90.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <Label prefHeight="37.0" prefWidth="354.0" text="Enter New Toy Information" translateX="17.0" translateY="-32.0" GridPane.rowSpan="2">
+                        <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowSpan="11">
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
+                        </Separator>
+                        <Separator prefWidth="200.0" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
+                        </Separator>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="3" GridPane.rowSpan="4">
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
+                        </Separator>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" GridPane.rowSpan="6">
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
+                        </Separator>
+                        <Separator prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
+                        </Separator>
+                        <Separator prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
+                        </Separator>
+                        <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" prefHeight="137.0" prefWidth="323.0" text="Enter New Toy Information:">
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets bottom="10.0" right="10.0" top="10.0" />
+                           </padding>
                            <font>
-                              <Font size="30.0" />
+                              <Font size="18.0" />
                            </font>
                         </Label>
+                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowSpan="4" GridPane.valignment="CENTER">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="17.0" prefWidth="323.0" text="Figure" textAlignment="CENTER">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <HBox alignment="TOP_CENTER" prefHeight="65.0" prefWidth="300.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="96.0" text="Classification">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="TextFieldAddClass" prefHeight="25.0" prefWidth="156.0">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4" GridPane.rowSpan="4">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="67.0" prefWidth="350.0" text="Animal" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <HBox alignment="TOP_CENTER">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="90.0" text="Material">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="TextFieldAddMaterial" prefHeight="25.0" prefWidth="187.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="85.0" text="Size">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="TextFieldAddSize" prefHeight="25.0" prefWidth="190.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="5" GridPane.rowSpan="6">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="345.0" text="Puzzle">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Separator />
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="170.0" text="Type">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="221.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4" GridPane.rowIndex="5" GridPane.rowSpan="6">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="349.0" text="Board Game">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <HBox>
+                                 <children>
+                                    <Label text="Minimum Number of Players">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="TextFieldAddMinAge" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="118.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label text="Maximum Number of Players">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="TextFieldAddMaxAge" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="113.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label text="Designers">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="TextFieldAddDesigners" prefHeight="25.0" prefWidth="222.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox GridPane.rowIndex="2" GridPane.rowSpan="7">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <Label prefHeight="20.0" prefWidth="102.0" text="Category">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <ChoiceBox fx:id="chBoxAddCategory" prefHeight="25.0" prefWidth="210.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </ChoiceBox>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label prefHeight="20.0" prefWidth="102.0" text="Serial Number">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="TextFieldAddSN" prefHeight="25.0" prefWidth="210.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label prefHeight="20.0" prefWidth="98.0" text="Name">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="TextFieldAddName" prefHeight="25.0" prefWidth="210.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="TextFieldAddBrand">
+                                 <children>
+                                    <Label prefHeight="20.0" prefWidth="98.0" text="Brand">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField prefHeight="25.0" prefWidth="210.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label prefHeight="20.0" prefWidth="99.0" text="Price">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="TextFieldAddPrice" prefHeight="25.0" prefWidth="210.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label prefHeight="20.0" prefWidth="103.0" text="Available-count">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="TextFieldAddCount" prefHeight="25.0" prefWidth="210.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label prefHeight="20.0" prefWidth="118.0" text="Age-appropriate">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="TextFieldAddAge" prefHeight="25.0" prefWidth="210.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSaveHandler" prefHeight="35.0" prefWidth="343.0" text="Save" GridPane.rowIndex="9" GridPane.rowSpan="2">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </Button>
                      </children>
                   </GridPane>
                </children>
