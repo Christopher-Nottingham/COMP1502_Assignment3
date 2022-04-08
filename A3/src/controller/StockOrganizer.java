@@ -33,8 +33,6 @@ import view.AppMenu;
  * 
  *
  */
-
-
 public class StockOrganizer {
   @FXML
   private TextField TextFeildName;// Search Tab
@@ -83,8 +81,6 @@ public class StockOrganizer {
 
   @FXML
   private RadioButton rbType;// Search Tab
-
-
 
   @FXML
   private Tab tabAddToy;// Add Tab - Add Toy Tab Scene/View
@@ -171,13 +167,21 @@ public class StockOrganizer {
 
   @FXML
   /**
-   * Add toy method for the add tab
+   * Method confirms that btnSave was pressed
    * 
-   * @param event
+   * @param event The button has been pressed
    */
-  void btnSaveHandler(ActionEvent event) {
+  private void addToyHandler(ActionEvent event) {
+    if (tabMenu.getSelectionModel().equals(tabAddToy)) {
+      if (btnSave.isPressed()) {
+        btnSearchHandler(event);
+      }
+    }
+  }
 
-
+  @FXML
+  private void btnSaveHandler(ActionEvent event) {
+    addToy();
   }
 
 
@@ -477,6 +481,14 @@ public class StockOrganizer {
 
   }
 
+  @FXML
+  void initialize() {
+    ObservableList<String> categoryDropdown =
+        FXCollections.observableArrayList("Figures", "Animals", "Puzzles", "Board Games");
+    chBoxAddCategory.setItems(categoryDropdown);
+    chBoxAddCategory.getSelectionModel().select(0);
+  }
+
   /**
    * This method uses the entered Serial number to generate and add a new Toy to the store stock
    * list
@@ -485,6 +497,10 @@ public class StockOrganizer {
     String userInput;
     Toy newToy;
     String serialNum;
+
+    /*
+     * Create additional dropdown options
+     */
 
 
     /*

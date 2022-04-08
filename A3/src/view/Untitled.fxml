@@ -112,7 +112,7 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab fx:id="tabAddToy" closable="false" onSelectionChanged="#addToyHandler" text="Add Toy">
+      <Tab fx:id="tabAddToy" closable="false" text="Add Toy">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
