@@ -487,6 +487,11 @@ public class StockOrganizer {
         FXCollections.observableArrayList("Figures", "Animals", "Puzzles", "Board Games");
     chBoxAddCategory.setItems(categoryDropdown);
     chBoxAddCategory.getSelectionModel().select(0);
+
+    // ObservableList<String> figureDropdown =
+    // FXCollections.observableArrayList("Action", "Doll", "Historic");
+
+    // ObservableList<String>
   }
 
   /**
