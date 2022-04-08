@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-// import java.util.*;
 import exceptions.InputValidationException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -86,7 +85,7 @@ public class StockOrganizer {
   private Tab tabAddToy;// Add Tab - Add Toy Tab Scene/View
 
   @FXML
-  private ChoiceBox<String> chBoxAddCategory; // Add Tab - Choice Box
+  private ChoiceBox<String> cbAddCategory; // Add Tab - Choice Box
 
   @FXML
   private TextField TextFieldAddSN; // Add Tab - TextField (Serial Number)
@@ -110,16 +109,16 @@ public class StockOrganizer {
   private Button btnSave; // Add Tab - Button (Save)
 
   @FXML
-  private TextField TextFieldAddClass; // Add Tab - TextField (Classification)
+  private ChoiceBox<String> cbAddClass; // Add Tab - TextField (Classification)
 
   @FXML
   private TextField TextFieldAddMaterial; // Add Tab - TextField (Material)
 
   @FXML
-  private TextField TextFieldAddSize; // Add Tab - TextField (Size)
+  private ChoiceBox<String> cbAddSize; // Add Tab - TextField (Size)
 
   @FXML
-  private TextField TextFieldAddType; // Add Tab - TextField (Type)
+  private ChoiceBox<String> cbAddType; // Add Tab - TextField (Type)
 
   @FXML
   private TextField TextFieldAddMinPlayers; // Add Tab - TextField (Minimum Number of Players)
@@ -147,10 +146,12 @@ public class StockOrganizer {
                                                    // button is pressed
 
   private final String DB_PATH = "res/toys.txt"; // This is saved game data location
+  private final String LOG_PATH = "res/SystemLogs.log";
   private File database;// Declaring a file object
   private ArrayList<Toy> stock = new ArrayList<>();// Creating a stock inventory array list
   private AppMenu menu = new AppMenu();// Declaring and instantiating appMenu object
   Scanner input = new Scanner(System.in);// creating a scanner to read the users choice
+
 
 
   /**
@@ -166,22 +167,45 @@ public class StockOrganizer {
   }
 
   @FXML
-  /**
-   * Method confirms that btnSave was pressed
-   * 
-   * @param event The button has been pressed
-   */
-  private void addToyHandler(ActionEvent event) {
-    if (tabMenu.getSelectionModel().equals(tabAddToy)) {
-      if (btnSave.isPressed()) {
-        btnSearchHandler(event);
-      }
-    }
+  void initialize() {
+    ObservableList<String> categoryDropdown =
+        FXCollections.observableArrayList("Figures", "Animals", "Puzzles", "Board Games");
+    cbAddCategory.setItems(categoryDropdown);
+    cbAddCategory.getSelectionModel().select(0);
+
+
+    ObservableList<String> figureDropdown =
+        FXCollections.observableArrayList("Action", "Doll", "Historic");
+    cbAddClass.setItems(figureDropdown);
+    cbAddClass.getSelectionModel().select(0);
+
+    ObservableList<String> animalSize =
+        FXCollections.observableArrayList("Small", "Medium", "Large");
+    cbAddSize.setItems(animalSize);
+    cbAddSize.getSelectionModel().select(0);
+
+    ObservableList<String> puzzleType =
+        FXCollections.observableArrayList("Mechanical", "Cryptic", "Logic", "Trivia", "Riddle");
+    cbAddType.setItems(puzzleType);
+    cbAddType.getSelectionModel().select(0);
+
   }
 
   @FXML
   private void btnSaveHandler(ActionEvent event) {
-    addToy();
+    if (cbAddCategory.getValue().equals("Figures")) { // Run Add Toy as Figures
+      // LOGR.log(Level.INFO, "Running Add Toy Method using Figures Category");
+      addToy("Figures");
+    } else if (cbAddCategory.getValue().equals("Animals")) { // Run Add Toy as Animals
+      // Logger.log(Level.INFO, "Running Add Toy Method using Animals Category");
+      addToy("Animals");
+    } else if (cbAddCategory.getValue().equals("Puzzles")) { // Run Add Toy as Puzzles
+      // LOGGER.log(Level.INFO, "Running Add Toy Method using Puzzles Category");
+      addToy("Puzzles");
+    } else if (cbAddCategory.getValue().equals("Board Games")) { // Run Add Toy as Board Games
+      // LOGGER.log(Level.INFO, "Running Add Toy Method using Board Games Category");
+      addToy("Board Games");
+    }
   }
 
 
@@ -273,7 +297,7 @@ public class StockOrganizer {
           break;
         }
         case 2: {// handles add toy
-          addToy();
+          // addToy();
           break;
         }
         case 3: {// handles remove toy
@@ -481,124 +505,171 @@ public class StockOrganizer {
 
   }
 
-  @FXML
-  void initialize() {
-    ObservableList<String> categoryDropdown =
-        FXCollections.observableArrayList("Figures", "Animals", "Puzzles", "Board Games");
-    chBoxAddCategory.setItems(categoryDropdown);
-    chBoxAddCategory.getSelectionModel().select(0);
-
-    // ObservableList<String> figureDropdown =
-    // FXCollections.observableArrayList("Action", "Doll", "Historic");
-
-    // ObservableList<String>
-  }
-
   /**
    * This method uses the entered Serial number to generate and add a new Toy to the store stock
    * list
+   * 
+   * @param category
    */
-  public void addToy() {
-    String userInput;
+  public void addToy(String category) {
+
     Toy newToy;
-    String serialNum;
+    String serialNum = " ", name = " ", brand = " ", price = " ", count = " ", minAge = " ",
+        material = " ", minPlayers = " ", maxPlayers = " ", designers = " ";
+    char classification = 'a', size = 's', type = 'm';
 
-    /*
-     * Create additional dropdown options
-     */
-
-
-    /*
-     * Prompt for serial number, validate, and save value
-     */
-    userInput = menu.promptSerialNum();
-    while (!isValidSN(userInput, true)) {
-      userInput = menu.promptSerialNum();
+    if (isValidSN(TextFieldAddSN.getText())) {
+      if (TextFieldAddSN.getText().length() != 10) {
+        System.out.println("Replace w/ Log - Failed to save Serial Number");
+      } else {
+        serialNum = TextFieldAddSN.getText();
+      }
     }
-    serialNum = userInput;
+
+    if (TextFieldAddName.getText().isBlank()) {
+      System.out.println("Replace w/ Log - Must contain Name");
+    } else {
+      name = TextFieldAddName.getText();
+    }
+
+    if (TextFieldAddBrand.getText().isBlank()) {
+      System.out.println("Replace w/ Log - Must contain Brand");
+    } else {
+      brand = TextFieldAddBrand.getText();
+    }
+
+    if ((TextFieldAddPrice.getText().isBlank())
+        || (Double.parseDouble(TextFieldAddPrice.getText()) <= 0)) {
+      System.out
+          .println("Replace w/ Log - Must contain Price and cannot be Free or negative value");
+    } else {
+      price = TextFieldAddPrice.getText();
+    }
+
+    if (TextFieldAddCount.getText().isBlank()
+        || (Integer.parseInt(TextFieldAddCount.getText()) <= 0)) {
+      System.out.println("Replace w/ Log - Must contain count and cannot be zero");
+    } else {
+      count = TextFieldAddCount.getText();
+    }
+
+    if (TextFieldAddAge.getText().isBlank() || (Integer.parseInt(TextFieldAddAge.getText()) < 0)) {
+      System.out.println("Replace w/ Log - Must contain minimum recommended player age!");
+    } else {
+      minAge = TextFieldAddAge.getText();
+    }
 
     /*
-     * Prompt for Toy name, brand, price, stock amount, minimum recommended age
+     * Adding Figures
      */
-    String name = menu.promptToyName();
-    String brand = menu.promptToyBrand();
-    double price = menu.promptToyPrice();
-    int stockCount = menu.promptToyCount();
-    int minAge = menu.promptMinAge();
+    if (category.equals("Figures")) {
+      if (cbAddClass.getValue().equals("Action")) {
+        classification = 'a';
+      } else if (cbAddClass.getValue().equals("Doll")) {
+        classification = 'd';
+      } else if (cbAddClass.getValue().equals("Historic")) {
+        classification = 'h';
+      }
+
+      try {
+        menu.promptNewToy();
+        newToy = new Figure(serialNum, name, brand, Double.parseDouble(price),
+            Integer.parseInt(count), Integer.parseInt(minAge), classification);
+        System.out.println("New Item Created: " + newToy);
+        stock.add(newToy);
+      } catch (NullPointerException e) {
+        System.out.println("Error: " + e.getMessage());
+      }
+
+    }
 
     /*
-     * Check serial number to determine what kind of Toy is being made then calls the appropriate
-     * unique Toy-specific prompts before generating and adding new Toy to stock.
-     * 
-     * Serial starting in 0 or 1 equals a Figure
+     * Adding Animals
      */
-    if (serialNum.charAt(0) == '0' || serialNum.charAt(0) == '1') {
-      char classification = menu.promptFigClass();
-      newToy = new Figure(serialNum, name, brand, price, stockCount, minAge, classification);
+    else if (category.equals("Animals")) {
+      if (TextFieldAddMaterial.getText().isBlank()) {
+        System.out.println("Replace w/ Log - Must contain Toy material");
+      } else {
+        material = TextFieldAddMaterial.getText();
+      }
+
+      switch (cbAddSize.getValue()) {
+        case "Small":
+          size = 's';
+          break;
+        case "Medium":
+          size = 'm';
+          break;
+        case "Large":
+          size = 'l';
+          break;
+      }
       menu.promptNewToy();
+      newToy = new Animal(serialNum, name, brand, Double.parseDouble(price),
+          Integer.parseInt(count), Integer.parseInt(minAge), material, size);
+      System.out.println("New Item Created: " + newToy);
       stock.add(newToy);
     }
 
     /*
-     * Serial starting in 2 or 3 equals an Animal
+     * Adding Puzzles
      */
-    else if (serialNum.charAt(0) == '2' || serialNum.charAt(0) == '2') {
-      String material = menu.promptToyMaterial();
-      char size = menu.promptToySize();
-      newToy = new Animal(serialNum, name, brand, price, stockCount, minAge, material, size);
+    else if (category.equals("Puzzles")) {
+      switch (cbAddType.getValue()) {
+        case "Mechanical":
+          type = 'm';
+          break;
+        case "Cryptic":
+          type = 'c';
+          break;
+        case "Logic":
+          type = 'l';
+          break;
+        case "Trivia":
+          type = 't';
+          break;
+        case "Riddle":
+          type = 'r';
+          break;
+      }
       menu.promptNewToy();
+      newToy = new Puzzle(serialNum, name, brand, Double.parseDouble(price),
+          Integer.parseInt(count), Integer.parseInt(minAge), type);
+      System.out.println("Replace w/ Logging - New Item: " + newToy);
       stock.add(newToy);
     }
 
     /*
-     * Serial starting in 4, 5, or 6 equals a Puzzle
+     * Adding Board Game
      */
-    else if (serialNum.charAt(0) == '4' || serialNum.charAt(0) == '5'
-        || serialNum.charAt(0) == '6') {
-      char puzzleType = menu.promptPuzzleType();
-      newToy = new Puzzle(serialNum, name, brand, price, stockCount, minAge, puzzleType);
+    else if (category.equals("Board Games")) {
+      if (TextFieldAddMinPlayers.getText().isBlank()
+          || Integer.parseInt(TextFieldAddMinPlayers.getText()) <= 0) {
+        System.out.println(
+            "Replace w/ Log - Must contain player amount and cannot be less than or equal to zero");
+      } else {
+        minPlayers = TextFieldAddMinPlayers.getText();
+      }
+
+      if (TextFieldAddMaxPlayers.getText().isBlank() || Integer.parseInt(TextFieldAddMaxPlayers
+          .getText()) <= (Integer.parseInt(TextFieldAddMinPlayers.getText()))) {
+        System.out.println(
+            "Replace w/ Logging - Throw Exception - Max Amount of Players cannot be Less Than or Equal To Min Amount of Players");
+      } else {
+        maxPlayers = TextFieldAddMaxPlayers.getText();
+      }
+
+      if (TextFieldAddDesigners.getText().isBlank()) {
+        System.out.println("Replace w/ Log - Must contain Designer Name(s)");
+      } else {
+        designers = TextFieldAddDesigners.getText();
+      }
+
       menu.promptNewToy();
-      stock.add(newToy);
-    }
-
-    /*
-     * Serial starting in 7, 8, or 9 equals a board game
-     */
-    else if (serialNum.charAt(0) == '7' || serialNum.charAt(0) == '8'
-        || serialNum.charAt(0) == '9') {
-
-      int minPlayers = 0;
-      int maxPlayers = 0;
-
-      do {
-        minPlayers = menu.promptMinPlayers();
-        maxPlayers = menu.promptMaxPlayers();
-
-        try {
-          if (minPlayers > maxPlayers) {
-            throw new InputValidationException(
-                "Minimum number of players cannot be more than max number of players!");
-          }
-        } catch (InputValidationException e) {
-          System.out.println(e.getMessage());
-        }
-
-        try {
-          if (minPlayers == maxPlayers) {
-            throw new InputValidationException(
-                "Minimum number of players must be less than max number of players!");
-          }
-        } catch (InputValidationException e) {
-          System.out.println(e.getMessage());
-        }
-
-      } while (minPlayers >= maxPlayers);
-
-      String gameDesigners = menu.promptToyDesigner();
-
-      newToy = new Boardgame(serialNum, name, brand, price, stockCount, minAge, minPlayers,
-          maxPlayers, gameDesigners);
-      menu.promptNewToy();
+      newToy = new Boardgame(serialNum, name, brand, Double.parseDouble(price),
+          Integer.parseInt(count), Integer.parseInt(minAge), Integer.parseInt(minPlayers),
+          Integer.parseInt(maxPlayers), designers);
+      System.out.println("New Item Created: " + newToy);
       stock.add(newToy);
     }
   }
@@ -1165,6 +1236,16 @@ public class StockOrganizer {
     }
     return validity;
 
+  }
+
+  private boolean isValidSN(String message) {
+    try {
+      long serial = Long.parseLong(message);
+      return true;
+    } catch (NumberFormatException e) {
+      System.out.println("Error: " + message + "is not a valid serial number");
+      return false;
+    }
   }
 
 }

@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"model","l":"Animal"},{"p":"view","l":"AppMenu"},{"p":"model","l":"Boardgame"},{"p":"model","l":"Figure"},{"p":"exceptions","l":"InputValidationException"},{"p":"application","l":"Main"},{"p":"model","l":"Puzzle"},{"p":"controller","l":"StockOrganizer"},{"p":"model","l":"Toy"}]
