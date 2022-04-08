@@ -6,6 +6,7 @@ module A3 {
   requires javafx.graphics;
   requires javafx.base;
   requires java.logging;
+  requires org.apache.logging.log4j;
 
 
 

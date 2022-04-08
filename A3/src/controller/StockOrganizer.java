@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import exceptions.InputValidationException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -151,6 +154,8 @@ public class StockOrganizer {
   private ArrayList<Toy> stock = new ArrayList<>();// Creating a stock inventory array list
   private AppMenu menu = new AppMenu();// Declaring and instantiating appMenu object
   Scanner input = new Scanner(System.in);// creating a scanner to read the users choice
+  private Logger log4j = LogManager.getLogger("StockOrganizer"); // Initializing Logger
+  FileHandler fh = new FileHandler("res/Stock.log");
 
 
 
@@ -521,6 +526,7 @@ public class StockOrganizer {
     if (isValidSN(TextFieldAddSN.getText())) {
       if (TextFieldAddSN.getText().length() != 10) {
         System.out.println("Replace w/ Log - Failed to save Serial Number");
+        log4j.error("Failed to save Serial Number - Must be 10 digits long!");
       } else {
         serialNum = TextFieldAddSN.getText();
       }
